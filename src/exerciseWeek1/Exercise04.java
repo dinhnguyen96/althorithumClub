@@ -4,57 +4,46 @@ import java.util.Scanner;
 
 public class Exercise04 {
 
-    public static void arrayInput(int[] array, int n)
-    {
-        Scanner input = new Scanner(System.in);
-        for (int i = 0; i < n; i++)
-        {
-            System.out.print("array["+i+"] = ");
-            array[i] = input.nextInt();
-        }
-    }
-    public static boolean isExitsCheck(int[] array, int position, int k)
+    public static boolean isExitsCheck(String s, int position, char k)
     {
         for (int i = 0; i < position; i++)
         {
-            if (array[i] == k)
+            if (s.charAt(i)== k)
             {
                 return true;
             }
         }
         return false;
     }
-    public static int arrayElementCount(int[] array, int n, int k)
+    public static int stringElementCount(String s, char k)
     {
         int count = 0;
-        for (int i = 0; i < n; i++)
+        for (int i = 0; i < s.length(); i++)
         {
-            if (array[i] == k)
+            if (s.charAt(i) == k)
             {
                 count++;
             }
         }
         return count;
     }
-    public static void arrayOutput(int[] array, int n)
+    public static void stringOutput(String s)
     {
-        for (int i = 0; i < n; i++)
+        for (int i = 0; i < s.length(); i++)
         {
-            if (!isExitsCheck(array, i, array[i]))
+            if (s.charAt(i) != ' ' && !isExitsCheck(s, i,s.charAt(i)))
             {
-                int elementCount = arrayElementCount(array, n, array[i]);
-                System.out.printf("Phần tử %d xuất hiện %d lần \n", array[i], elementCount);
+                int elementCount = stringElementCount(s, s.charAt(i));
+                System.out.printf("Phần tử %c xuất hiện %d lần \n", s.charAt(i), elementCount);
             }
         }
     }
     public static void main(String[] args)
     {
         Scanner input = new Scanner(System.in);
-        System.out.print("Nhập n = ");
-        int n = input.nextInt();
-        int[] array = new int[n];
-        arrayInput(array, n);
-        arrayOutput(array,n);
+        System.out.print("Nhập chuỗi = ");
+        String s = input.nextLine();
+        stringOutput(s);
 
     }
 }
