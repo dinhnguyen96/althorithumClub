@@ -1,10 +1,10 @@
 package exerciseWeek1;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Exercise02
 {
-
     public static void arrayInput(int[] array, int n)
     {
         Scanner input = new Scanner(System.in);
@@ -14,18 +14,12 @@ public class Exercise02
             array[i] = input.nextInt();
         }
     }
-    public static void swap(int[] array, int i, int j)
-    {
-        int temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
-    }
-    public static void arraySortAfterPositionDisplay(int[] array, int n)
+    public static String arraySortAfterPositionDisplay(int[] array, int n)
     {;
-        int minPosition;
+        int[] initElementPosition = {0,1,2,3,4};
         for (int i = 0; i < n - 1; i++)
         {
-            minPosition = i;
+            int minPosition = i,minElement = array[i];
             for (int j = i+1; j < n; j++)
             {
                if (array[j] < array[minPosition])
@@ -33,8 +27,18 @@ public class Exercise02
                    minPosition = j;
                }
             }
-            swap(array, i, minPosition);
+            int temp = array[i];
+            array[i] = array[minPosition];
+            array[minPosition] = temp;
+
+            if (minElement != array[i])
+            {
+                int positionTemp = initElementPosition[i];
+                initElementPosition[i] = initElementPosition[minPosition];
+                initElementPosition[minPosition] = positionTemp;
+            }
         }
+        return Arrays.toString(initElementPosition);
 
     }
 
@@ -45,25 +49,7 @@ public class Exercise02
          int n = input.nextInt();
          int[] array = new int[n];
          arrayInput(array, n);
-         int[] initElement = new int[n];
-         int[] initElementPosition = new int[n];
-         for (int i = 0; i < n;i++)
-         {
-             initElement[i] = array[i];
-         }
-         arraySortAfterPositionDisplay(array,n);
-         for (int i = 0; i < n;i++)
-         {
-             int j = 0;
-             while (j < n && initElement[j] != array[i])
-             {
-                 j++;
-             }
-             initElementPosition[i] = j;
-         }
-         for (int i = 0; i < n;i++)
-         {
-             System.out.println(initElementPosition[i] + " ");
-         }
+         String result = arraySortAfterPositionDisplay(array,n);
+         System.out.println(result);
     }
 }
